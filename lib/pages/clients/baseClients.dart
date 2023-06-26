@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
-import '../../datasourse/User.dart';
+import "package:valencia/datasourse/User.dart";
 import 'package:valencia/pages/clients/clientCard.dart';
 
 class ClientBase extends StatefulWidget {
-
-  @override
-  State<StatefulWidget> createState() => _clientsBaseState();
-
-}
-
-class _clientsBaseState extends State<ClientBase> {
   static List<User> listUsers = [
     User(
-      Id: 1,
-      firstName: "Ирина",
-      secondName: "Любимова",
-      patronymic: "Игоревна",
-      password: "1wf12f3fa3",
-      phone: "88008000000",
-      photoUrl: "gesges",
-      telegram: "fgw4f3af2fas3"
+        Id: 1,
+        firstName: "Ирина",
+        secondName: "Любимова",
+        patronymic: "Игоревна",
+        password: "1wf12f3fa3",
+        phone: "88008000000",
+        photoUrl: "gesges",
+        telegram: "fgw4f3af2fas3"
     ),
     User(
         Id: 2,
@@ -117,6 +110,13 @@ class _clientsBaseState extends State<ClientBase> {
   ];
 
   @override
+  State<StatefulWidget> createState() => _clientsBaseState();
+
+}
+
+class _clientsBaseState extends State<ClientBase> {
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(230, 230, 230, 1.0),
@@ -141,7 +141,7 @@ class _clientsBaseState extends State<ClientBase> {
         child: Column(
 
           children: [
-            Text("Всего клиентов - ${listUsers.length}",
+            Text("Всего клиентов - ${ClientBase.listUsers.length}",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
@@ -149,18 +149,18 @@ class _clientsBaseState extends State<ClientBase> {
             ),),
             Expanded(
                 child: ListView.builder(
-                  itemCount: listUsers.length,
+                  itemCount: ClientBase.listUsers.length,
                   itemBuilder: (context, index) {
-                    User user = listUsers[index];
+                    User user = ClientBase.listUsers[index];
                     return Container(
                       alignment: Alignment.centerLeft,
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 16),
                       child: ListTile(
                         onTap: () {
 
-                          print('Нажат элемент с индексом ${listUsers[index].firstName}');
+                          print('Нажат элемент с индексом ${ClientBase.listUsers[index].firstName}');
 
-                          clientCard.client = listUsers[index];
+                          clientCard.client = ClientBase.listUsers[index];
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => clientCard()));
                         },
                         trailing: Image.asset("assets/images/arrow.png"),

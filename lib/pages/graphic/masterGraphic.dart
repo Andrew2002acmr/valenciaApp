@@ -10,7 +10,7 @@ class Graphic extends StatefulWidget {
   static List<Procedure> procList = [
     Procedure(
         Id: 0,
-        name: "наращивание",
+        name: "Кератиновое окрашивание",
         desc: "Наращивание",
         price: 1200,
         category: "Волосы",
@@ -19,10 +19,10 @@ class Graphic extends StatefulWidget {
     ),
     Procedure(
         Id: 1,
-        name: "Дизайн",
+        name: "Укладка",
         desc: "дизайн",
         price: 1500,
-        category: "Ногти",
+        category: "Волосы",
         expenses: 100,
         minute: 60
     ),

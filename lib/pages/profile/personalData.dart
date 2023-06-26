@@ -5,6 +5,8 @@ import 'package:dotted_border/dotted_border.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:valencia/datasourse/User.dart';
+import 'package:valencia/datasourse/Master.dart';
 
 class editPersonalData extends StatefulWidget {
   @override
@@ -13,6 +15,25 @@ class editPersonalData extends StatefulWidget {
 }
 
 class _editPersonalDataState extends State<editPersonalData> {
+
+  final TextEditingController _secondNameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _expController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _secondNameController.text = PersonalData.userMaster.secondName.toString();
+    _firstNameController.text = PersonalData.userMaster.firstName.toString();
+    _cityController.text = PersonalData.master.city.toString();
+    _addressController.text = PersonalData.master.address.toString();
+    _phoneNumberController.text = PersonalData.userMaster.phone.toString();
+    _emailController.text = PersonalData.master.email.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +54,15 @@ class _editPersonalDataState extends State<editPersonalData> {
         body: SingleChildScrollView(
 
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),  // Отступы по бокам
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 16),  // Отступ между полями
+                  margin: EdgeInsets.only(bottom: 16),
                   child: TextField(
+
+                    controller: _cityController,
+                    readOnly: true,
                     decoration: InputDecoration(
                         fillColor: Colors.grey[200],
                         filled: true,
@@ -51,8 +75,11 @@ class _editPersonalDataState extends State<editPersonalData> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 16),  // Отступ между полями
+                  margin: EdgeInsets.only(bottom: 16),
                   child: TextField(
+
+                    controller: _addressController,
+                    readOnly: true,
                     decoration: InputDecoration(
                         fillColor: Colors.grey[200],
                         filled: true,
@@ -65,8 +92,11 @@ class _editPersonalDataState extends State<editPersonalData> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 16),  // Отступ между полями
+                  margin: EdgeInsets.only(bottom: 16),
                   child: TextField(
+
+                    controller: _phoneNumberController,
+                    readOnly: true,
                     decoration: InputDecoration(
                         fillColor: Colors.grey[200],
                         filled: true,
@@ -79,8 +109,11 @@ class _editPersonalDataState extends State<editPersonalData> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 16),  // Отступ между полями
+                  margin: EdgeInsets.only(bottom: 16),
                   child: TextField(
+
+                    controller: _emailController,
+                    readOnly: true,
                     decoration: InputDecoration(
                         fillColor: Colors.grey[200],
                         filled: true,
@@ -92,11 +125,69 @@ class _editPersonalDataState extends State<editPersonalData> {
                     ),
                   ),
                 ),
+                Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(
+                          width: 1,
+                          color: Color.fromRGBO(202, 210, 210, 1.0)
+                      ),
+                      borderRadius: BorderRadius.circular(8), // Округление углов
+                    ),
+                    height: 110, // Фиксированная высота
+                    child: CupertinoTextField(
+                      textAlignVertical: TextAlignVertical.top,
+                      controller: _expController,
+                      maxLines: null, // Многострочный ввод
+                      placeholder: 'Введите текст',
+                      padding: EdgeInsets.all(8), // Отступы внутри текстового поля
+                      decoration: BoxDecoration(
+                        color: Colors.transparent, // Прозрачный фон для текстового поля
+                      ),
+                    )
+                )
               ],
             ),
           )
 
-    )
+    ),
+        bottomSheet: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 25),
+              child: SizedBox(
+                width: 325,
+                height: 46,
+                child:
+                TextButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(147, 80, 255, 1)),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 16)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(color: Color.fromRGBO(147, 80, 255, 1))
+                            )
+                        )
+                    ),
+                    onPressed: () {
+                      // Navigator.pushAndRemoveUntil(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => LoginRoute()
+                      //     ),
+                      //     ModalRoute.withName("/")
+                      // );
+                    },
+                    child: Text("Сохранить изменения")
+                ),
+              ),
+            ),
+          ],
+        )
     );
   }
 
@@ -104,13 +195,52 @@ class _editPersonalDataState extends State<editPersonalData> {
 }
 
 class PersonalData extends StatefulWidget {
+  static User userMaster = User(
+      Id: 0,
+      firstName: "Иванова",
+      secondName: "Екатерина",
+      patronymic: "Ивановна",
+      phone: "89000000000",
+      password: "123456",
+      photoUrl: "photoUrl",
+      telegram: "telegram"
+  );
 
+  static Master master = Master(
+      Id: 0,
+      procedureId: 0,
+      budget: 100,
+      userId: 0,
+      workExp: "Я занимаюсь ноготочками на протяжении 5 лет. Делаю дизайны любой сложности, работаю с любыми ногтями.",
+      address: "Ул. Соборная 19 офис 120",
+      email: "stalker228@mail.ru",
+      city: "г.Кемерово"
+  );
 
   @override
   State<StatefulWidget> createState() => _peronalDataState();
 }
 
 class _peronalDataState extends State<PersonalData> {
+
+  final TextEditingController _secondNameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _expController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _secondNameController.text = PersonalData.userMaster.secondName.toString();
+    _firstNameController.text = PersonalData.userMaster.firstName.toString();
+    _cityController.text = PersonalData.master.city.toString();
+    _addressController.text = PersonalData.master.address.toString();
+    _phoneNumberController.text = PersonalData.userMaster.phone.toString();
+    _emailController.text = PersonalData.master.email.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +278,13 @@ class _peronalDataState extends State<PersonalData> {
 
                 children: [
                   Container(
-                    margin: EdgeInsets.only(right: 22),
-                    child: Image.asset("assets/images/profileAvatar.png", width: 100, height: 100,),
+                    width: 100,
+                    height: 100,
+                    margin: EdgeInsets.only(right: 28),
+                    child: Transform.scale(
+                      scale: 1.5,
+                      child: Image.asset("assets/images/profileAvatar.png"),
+                    ),
                   ),
                   Column(
                     children: [
@@ -159,9 +294,7 @@ class _peronalDataState extends State<PersonalData> {
                           color: Colors.grey,
                           borderType: BorderType.RRect,
                           radius: Radius.circular(4),
-                          // dashPattern: [10,5,10,5,10,5],
                           child: SizedBox(
-
                             width: 202,
                             height: 46,
                             child:
@@ -231,7 +364,7 @@ class _peronalDataState extends State<PersonalData> {
               Padding(padding: EdgeInsets.symmetric(vertical: 10),
               child: TextField(
 
-                // controller: _countProcedureController,
+                controller: _secondNameController,
                 readOnly: true,
                 decoration: InputDecoration(
                     fillColor: Colors.grey[200],
@@ -246,8 +379,7 @@ class _peronalDataState extends State<PersonalData> {
               ),
               Padding(padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextField(
-
-                  // controller: _countProcedureController,
+                  controller: _firstNameController,
                   readOnly: true,
                   decoration: InputDecoration(
                       fillColor: Colors.grey[200],
@@ -262,8 +394,7 @@ class _peronalDataState extends State<PersonalData> {
               ),
               Padding(padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextField(
-
-                  // controller: _countProcedureController,
+                  controller: _cityController,
                   readOnly: true,
                   decoration: InputDecoration(
                       fillColor: Colors.grey[200],
@@ -278,8 +409,7 @@ class _peronalDataState extends State<PersonalData> {
               ),
               Padding(padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextField(
-
-                  // controller: _countProcedureController,
+                  controller: _addressController,
                   readOnly: true,
                   decoration: InputDecoration(
                       fillColor: Colors.grey[200],
@@ -294,8 +424,7 @@ class _peronalDataState extends State<PersonalData> {
               ),
               Padding(padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextField(
-
-                  // controller: _countProcedureController,
+                  controller: _phoneNumberController,
                   readOnly: true,
                   decoration: InputDecoration(
                       fillColor: Colors.grey[200],
@@ -310,8 +439,7 @@ class _peronalDataState extends State<PersonalData> {
               ),
               Padding(padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextField(
-
-                  // controller: _countProcedureController,
+                  controller: _emailController,
                   readOnly: true,
                   decoration: InputDecoration(
                       fillColor: Colors.grey[200],
@@ -337,7 +465,7 @@ class _peronalDataState extends State<PersonalData> {
                 height: 110, // Фиксированная высота
                 child: CupertinoTextField(
                   textAlignVertical: TextAlignVertical.top,
-                  controller: textController,
+                  controller: _expController,
                   maxLines: null, // Многострочный ввод
                   placeholder: 'Введите текст',
                   padding: EdgeInsets.all(8), // Отступы внутри текстового поля
@@ -358,6 +486,6 @@ class _peronalDataState extends State<PersonalData> {
     );
   }
 
-  TextEditingController textController = TextEditingController(text: "123");
+  // TextEditingController textController = TextEditingController(text: "123");
 }
 

@@ -47,7 +47,7 @@ class _ditailState extends State<ditailStateful> {
 
   @override
   Widget build(BuildContext context) {
-
+    DateFormat dateFormat = DateFormat("d MMMM HH:mm", "ru");
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Color.fromRGBO(230, 230, 230, 1.0),
@@ -132,7 +132,7 @@ class _ditailState extends State<ditailStateful> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          "${DateFormat("d MMMM H:m").format(ditailStateful.rec.dateRec)}",
+                          "${dateFormat.format(ditailStateful.rec.dateRec)}",
                           style: TextStyle(
                               fontFamily: "Nunito",
                               fontSize: 20

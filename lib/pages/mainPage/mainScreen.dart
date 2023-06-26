@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:valencia/main.dart';
 import 'package:valencia/datasourse/Recording.dart';
-import 'package:valencia/pages/mainPage/profil.dart';
+import 'package:valencia/pages/profile/profil.dart';
 import 'package:valencia/datasourse/User.dart';
 import 'package:valencia/datasourse/Procedure.dart';
 import 'package:valencia/pages/mainPage/recDitail.dart';

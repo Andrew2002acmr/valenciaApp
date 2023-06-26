@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:valencia/pages/mainPage/recDitail.dart';
+import 'package:valencia/pages/clients/baseClients.dart';
 
 import 'package:intl/intl.dart';
-import '../../datasourse/User.dart';
+import "package:valencia/datasourse/User.dart";
 
 
 class clientCard extends StatefulWidget{
@@ -82,13 +83,12 @@ class _clientCardState extends State<clientCard> {
                             )
                         ),
                         onPressed: () {
-                          // Navigator.pushAndRemoveUntil(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => LoginRoute()
-                          //     ),
-                          //     ModalRoute.withName("/")
-                          // );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => clientCard()
+                            ),
+                          );
 
                         },
                         child: Text("Оставить")
@@ -115,7 +115,13 @@ class _clientCardState extends State<clientCard> {
                             )
                         ),
                         onPressed: () {
-                          // Navigator.pushNamed(context, "/signup");
+                          ClientBase.listUsers.remove(clientCard.client);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ClientBase()
+                            ),
+                          );
                         },
                         child: Text("УДАЛИТЬ ПОЛЬЗОВАТЕЛЯ")
                     ),
@@ -237,7 +243,7 @@ class _clientCardState extends State<clientCard> {
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
                   alignment: AlignmentDirectional.centerStart,
                   child: Text(
-                    "${DateFormat("d MMMM H:m").format(ditailStateful.rec.dateRec)}",
+                    "${DateFormat("d MMMM H:m", "ru").format(ditailStateful.rec.dateRec)}",
                     style: TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 20

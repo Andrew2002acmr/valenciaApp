@@ -1,11 +1,50 @@
-
-
-
+import 'package:valencia/pages/procedure/procedureDitail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:valencia/datasourse/Procedure.dart';
 
 class Procedures extends StatefulWidget {
+
+  static List<Procedure> procList = [
+    Procedure(
+        Id: 0,
+        name: "Креативное выпрямление",
+        desc: "Керативное выпрямление",
+        price: 4000,
+        category: "Волосы",
+        expenses: 1000,
+        minute: 240
+    ),
+    Procedure(
+        Id: 1,
+        name: "Стрижка",
+        desc: "Стрижка волос",
+        price: 1000,
+        category: "Волосы",
+        expenses: 100,
+        minute: 60
+    ),
+    Procedure(
+        Id: 2,
+        name: "Окрашивание",
+        desc: "Окрашивание хной, "
+            "оттеночным шампунем, профессиональной краской без аммиака или тоником.",
+        price: 2000,
+        category: "Волосы",
+        expenses: 450,
+        minute: 120
+    ),
+    Procedure(
+        Id: 3,
+        name: "Укладка",
+        desc: "Укладка волос",
+        price: 1000,
+        category: "Волосы",
+        expenses: 200,
+        minute: 60
+    ),
+  ];
+
   @override
   State<StatefulWidget> createState() => _proceduresState();
 
@@ -13,27 +52,7 @@ class Procedures extends StatefulWidget {
 
 class _proceduresState extends State<Procedures> {
 
-  List<Procedure> procList = [
-    Procedure(
-        Id: 1,
-        name: "Гель-лак",
-        desc: "гельлак",
-        price: 1200,
-        category: "Ногти",
-        expenses: 450,
-        minute: 60
-    ),
-    Procedure(
-        Id: 2,
-        name: "Окрашивание",
-        desc: "окрашивание чего-то",
-        price: 2000,
-        category: "Волосы",
-        expenses: 600,
-        minute: 120
-    ),
 
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +80,7 @@ class _proceduresState extends State<Procedures> {
                 padding: EdgeInsets.only(left: 16, top: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text("Всего процедур - ${10}", style: TextStyle(
+                  child: Text("Всего процедур - ${Procedures.procList.length}", style: TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 28,
                       fontWeight: FontWeight.w700
@@ -70,14 +89,15 @@ class _proceduresState extends State<Procedures> {
               ),
               Expanded(
                   child: ListView.builder(
-                      itemCount: procList.length,
+                      itemCount: Procedures.procList.length,
                       itemBuilder: (context, index) {
-                        Procedure proc = procList[index];
+                        Procedure proc = Procedures.procList[index];
                         return Container(
 
                           child: ListTile(
                             onTap: () {
-
+                              ProcedureDitail.proc = Procedures.procList[index];
+                              Navigator.pushNamed(context, "/procedureDitail");
                             },
                             trailing: Image.asset("assets/images/arrow.png"),
                             title: Text("${proc.name}", style: TextStyle(
@@ -111,13 +131,13 @@ class _proceduresState extends State<Procedures> {
                           )
                       ),
                       onPressed: () {
-                        // Navigator.pushAndRemoveUntil(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => LoginRoute()
-                        //     ),
-                        //     ModalRoute.withName("/")
-                        // );
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => addProcedure()
+                            ),
+                            ModalRoute.withName("/procedure")
+                        );
 
                       },
                       child: Text("Добавить процедуру")

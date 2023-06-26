@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:valencia/pages/mainPage/mainScreen.dart';
+import 'package:valencia/main.dart';
 import 'package:valencia/pages/registration/registrationPages.dart';
 import 'package:valencia/pages/repairPassword/repairPassword.dart';
 
@@ -148,13 +150,12 @@ class LoginRoute extends StatelessWidget{
                             )
                         ),
                         onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginRoute()
-                              ),
-                              ModalRoute.withName("/")
+                          MyApp.autorize = true;
+                          Navigator.pushReplacement(
+                            context,
+                              MaterialPageRoute(builder: (context) =>  HomePage())
                           );
+
 
                         },
                         child: Text("ВХОД")

@@ -4,6 +4,9 @@ class Master {
   double budget;
   int userId;
   String workExp;
+  String address;
+  String email;
+  String city;
 
   Master({
     required this.Id,
@@ -11,5 +14,8 @@ class Master {
     required this.budget,
     required this.userId,
     required this.workExp,
+    required this.address,
+    required this.email,
+    required this.city
   });
 }

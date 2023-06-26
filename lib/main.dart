@@ -9,7 +9,7 @@ import 'package:valencia/pages/registration/registrationPages.dart';
 import 'package:valencia/pages/repairPassword/repairPassword.dart';
 import 'package:valencia/pages/mainPage/mainScreen.dart';
 import 'package:valencia/pages/mainPage/recDitail.dart';
-import 'package:valencia/pages/mainPage/profil.dart';
+import 'package:valencia/pages/profile/profil.dart';
 import 'package:valencia/pages/finance/budget.dart';
 import 'package:valencia/pages/clients/baseClients.dart';
 import 'package:valencia/pages/chats/chats.dart';
@@ -167,10 +167,11 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       title: "valencia",
       debugShowCheckedModeBanner: false,
-      initialRoute: autorize ? "/" : "/login",
+      initialRoute: "/",
+      // initialRoute: autorize ? "/" : "/login",
       // home: autorize ? LoginRoute() : RegistrationRoute(),
       routes: {
-        "/": (BuildContext context) => HomePage() ,
+        "/": (BuildContext context) => autorize ? HomePage() : LoginRoute() ,
         "/login": (BuildContext context) => LoginRoute(),
         "/signup": (BuildContext context) => RegistrationRoute(),
         "/recovery": (BuildContext context) => RepairPassRoute(),
@@ -182,6 +183,7 @@ class MyApp extends StatelessWidget{
         "/chats": (BuildContext context) => Chats(),
         "/procedure": (BuildContext context) => Procedures(),
         "/procedureDitail": (BuildContext context) => ProcedureDitail(),
+        "/addProcedure": (BuildContext context) => addProcedure(),
         "/graphic": (BuildContext context) => Graphic(),
         "/personal": (BuildContext context) => PersonalData(),
         "/personalEdit": (BuildContext context) => editPersonalData()

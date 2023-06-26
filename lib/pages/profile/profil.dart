@@ -2,9 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:valencia/main.dart';
 import 'package:valencia/datasourse/User.dart';
 import 'package:valencia/datasourse/Master.dart';
+import 'package:valencia/pages/autorize/mainAutorize.dart';
 
 
 class profilePage extends StatefulWidget {
@@ -193,6 +194,8 @@ class _profilePageState extends State<profilePage> {
                       onTap: () {
                         // Обработчик нажатия для первой кнопки
                         print('Button 5 tapped');
+
+                        Navigator.pushNamed(context, "/procedure");
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -219,7 +222,11 @@ class _profilePageState extends State<profilePage> {
                     GestureDetector(
                       onTap: () {
                         // Обработчик нажатия для первой кнопки
-                        print('Button 6 tapped');
+                       MyApp.autorize = false;
+                       Navigator.pushReplacement(
+                           context,
+                           MaterialPageRoute(builder: (context) =>  LoginRoute())
+                       );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
