@@ -81,6 +81,8 @@ class _profilePageState extends State<profilePage> {
                       onTap: () {
                         // Обработчик нажатия для первой кнопки
                         print('Button 1 tapped');
+
+                        Navigator.pushNamed(context, "/personal");
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

@@ -87,7 +87,7 @@ void main() {
 
 
 class MyApp extends StatelessWidget{
-  static bool autorize = true;
+  static bool autorize = false;
   // final procedureList = ['https://catfact.ninja/fact', 'https://catfact.ninja/fact/2'];
   //
   // static double income = 0;
@@ -167,7 +167,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       title: "valencia",
       debugShowCheckedModeBanner: false,
-      initialRoute: autorize ? "/personalEdit" : "/login",
+      initialRoute: autorize ? "/" : "/login",
       // home: autorize ? LoginRoute() : RegistrationRoute(),
       routes: {
         "/": (BuildContext context) => HomePage() ,
