@@ -1,6 +1,10 @@
+// import 'dart:io';
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:valencia/pages/autorize/mainAutorize.dart';
-
+import 'package:image_picker/image_picker.dart';
 
 enum UserGroup {master, user}
 
@@ -278,7 +282,14 @@ class _FirstStep extends State<RegistrationRoute>{
                           )
                       ),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondStepReg()));
+                        if(value == 0) {
+
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ClientSecondStepReg()));
+                        }
+                        else{
+
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondStepReg()));
+                        }
                       },
                       child: Text("Далее")
                   ),
@@ -296,6 +307,296 @@ class _FirstStep extends State<RegistrationRoute>{
 
 
 
+}
+
+
+
+class ClientSecondStepReg extends StatefulWidget{
+
+  @override
+  State<StatefulWidget> createState() => _cleintSecondStepRegState();
+
+}
+
+class _cleintSecondStepRegState extends State<ClientSecondStepReg> {
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text( "Регистрация"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerRight,
+                  end: Alignment.centerLeft,
+                  colors: [Color.fromRGBO(102, 0, 165, 1), Color.fromRGBO(232, 0, 240, 1)])
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: Container(
+        color: Color.fromRGBO(217, 217, 217, 1),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                  child: Text("Шаг 2 из 3", style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold
+                  ),),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
+                  child: Text("Укажите ваш город", style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey
+                  ),),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                  child:  SizedBox(
+                    width: 328,
+                    height: 50,
+                    child: TextFormField(
+                      onChanged: (String text) {
+                        String x;
+                        try{
+                          x = text;
+                        }
+                        catch(error){
+                          print("Ошибка");
+                        }
+
+                      },
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromRGBO(120, 120, 120, 1),
+                          fontWeight: FontWeight.w300
+                      ),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromRGBO(
+                            246, 246, 246, 1),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1, color: Color.fromRGBO(246, 246, 246, 1)),
+                            borderRadius: BorderRadius.all(Radius.circular(10))//<-- SEE HERE
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1, color: Color.fromRGBO(147, 80, 255, 1)),
+                            borderRadius: BorderRadius.all(Radius.circular(10))//<-- SEE HERE
+                        ),
+
+
+                      ),
+                    ),
+                  ),
+
+                ),
+                Container(
+
+                  child: SizedBox(
+                    width: 325,
+                    height: 46,
+                    child:
+                    TextButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(147, 80, 255, 1)),
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 16)),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    side: BorderSide(color: Color.fromRGBO(147, 80, 255, 1))
+                                )
+                            )
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ClientThirdPageReg()));
+                        },
+                        child: Text("Далее")
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+
+}
+
+class ClientThirdPageReg extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() => _clientThirdPageRegState();
+
+}
+
+class _clientThirdPageRegState extends State<ClientThirdPageReg> {
+  PickedFile? _image;
+
+  Future<void> _pickImageFromGallery() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = pickedImage;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Регистрация"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerRight,
+                  end: Alignment.centerLeft,
+                  colors: [
+                    Color.fromRGBO(102, 0, 165, 1),
+                    Color.fromRGBO(232, 0, 240, 1)
+                  ])),
+        ),
+        centerTitle: true,
+      ),
+      body: Container(
+        color: Color.fromRGBO(217, 217, 217, 1),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                  child: Text(
+                    "Шаг 3 из 3",
+                    style: TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 24),
+                  child: Text(
+                    "Загрузите ваше фото",
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _pickImageFromGallery();
+                  },
+                  child: Container(
+                    // alignment: Alignment.center,
+                    width: 320,
+                    height: 240,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: _image != null
+                        ? Image.file(
+                      File(_image!.path),
+                      fit: BoxFit.cover,
+                    )
+                        : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.camera_enhance_outlined,
+                          size: 80,
+                          color: Colors.grey,
+                        ),
+                        Text("Нажмите, чтобы загрузить", style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: "Nuntio",
+                          color: Colors.grey
+                        ),)
+                      ],
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('•'),
+                        SizedBox(width: 8.0),
+                        Text('Не более 10 мб', style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: "Nuntio"
+                        ),),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('•'),
+                        SizedBox(width: 8.0),
+                        Text('Разрешение не менее 640х280', style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: "Nuntio"
+                        ),),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Container(
+                      child: SizedBox(
+                        width: 325,
+                        height: 46,
+                        child: TextButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(
+                                Color.fromRGBO(147, 80, 255, 1)),
+                            foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                            textStyle:
+                            MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 16)),
+                            shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(
+                                  color: Color.fromRGBO(147, 80, 255, 1),
+                                ),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => LoginRoute(),
+                            ));
+                          },
+                          child: Text("Далее"),
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 

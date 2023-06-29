@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:valencia/client/mainClient.dart';
 import 'package:valencia/pages/autorize/mainAutorize.dart';
 import 'package:valencia/pages/clients/clientCard.dart';
 import 'package:valencia/pages/registration/registrationPages.dart';
@@ -171,7 +172,7 @@ class MyApp extends StatelessWidget{
       // initialRoute: autorize ? "/" : "/login",
       // home: autorize ? LoginRoute() : RegistrationRoute(),
       routes: {
-        "/": (BuildContext context) => autorize ? HomePage() : LoginRoute() ,
+        "/": (BuildContext context) => autorize ? ClientHomePage() : LoginRoute() ,
         "/login": (BuildContext context) => LoginRoute(),
         "/signup": (BuildContext context) => RegistrationRoute(),
         "/recovery": (BuildContext context) => RepairPassRoute(),

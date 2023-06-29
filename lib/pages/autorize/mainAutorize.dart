@@ -3,6 +3,7 @@ import 'package:valencia/pages/mainPage/mainScreen.dart';
 import 'package:valencia/main.dart';
 import 'package:valencia/pages/registration/registrationPages.dart';
 import 'package:valencia/pages/repairPassword/repairPassword.dart';
+import 'package:valencia/client/mainClient.dart';
 
 
 
@@ -153,7 +154,7 @@ class LoginRoute extends StatelessWidget{
                           MyApp.autorize = true;
                           Navigator.pushReplacement(
                             context,
-                              MaterialPageRoute(builder: (context) =>  HomePage())
+                              MaterialPageRoute(builder: (context) =>  ClientHomePage())
                           );
 
 
